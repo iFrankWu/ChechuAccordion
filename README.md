@@ -1,5 +1,4 @@
 ChechuAccordion
-<<<<<<< HEAD
 ================================
 
 Zepto and jQuery Plugin: ChechuAccordion offers and easy way of displaying html content with css transitions
@@ -18,8 +17,4 @@ TODOLIST (Next version) :
 and much more to come....
 
 Chechu.
-=======
-===============
 
-Easy Accordion plugin for Zepto or Jquery (Works on Mobile &amp; Desktop)
->>>>>>> 14a075c7e71580e4106d16f7d4226146401a3933
