@@ -13,13 +13,13 @@
 
         // Plugin Options
         this.$effect               = this.options.effect        || 'slideDown'; // slideUp, slideDown
-        this.$slideTime            = this.options.slideTime     || 1.5;         // Time in milliseconds
+        this.$slideTime            = this.options.slideTime     || 1.0;        // Time in milliseconds
         this.$closeAnySlide        = this.options.closeAnySlide || true;
+        this.$loaderImg            = (this.options.loaderImg) ? true : false;
 
         // Dom elements
         this.$accordion            = this.$container.children();
         this.$accordionHeading     = this.$accordion.find('h2');
-        //this.$accordionHeadingOpen = this.$accordionHeading.addClass('opened');
         this.$accordionContent     = this.$accordionHeading.next('div');
 
       // init plugin
@@ -32,18 +32,25 @@
         var toggleAccordion = function(){
             t.$accordionHeading.on('click',function(){
               // Close any opened content
-              $.each(t.$accordionHeading, function(){
-                t.$accordionContent.hide().removeAttr('style').parent().find('span').text('+');
-              });
+              closeToggles();
+              // Show loader in case is activated
+              if(t.$loaderImg)  t.$accordion.addClass('loader');
               // Show current clicked content
-              $(this).next(this.$accordionContent).show()
-                .css("" + Prefixes() + "" , ""+t.$effect+" "+t.$slideTime+"s ease")
-                  .parent()
-                    .find('span')
-                      .text('-');
+              showCurrentContent.apply(this);
             });
         };
-        toggleAccordion();
+        var closeToggles = function(){
+          $.each(t.$accordionHeading, function(){
+              t.$accordionContent.hide().removeAttr('style').parent().find('span').text('+');
+          });
+        };
+        var showCurrentContent = function(){
+          $(this).next(this.$accordionContent).show()
+              .css("" + Prefixes() + "" , ""+t.$effect+" "+t.$slideTime+"s ease")
+                .parent()
+                  .find('span')
+                    .text('-');
+        };
         // Get Css Prefixes in order to animate the movement with any web browser
         var Prefixes = function () {
           var styles = window.getComputedStyle(document.documentElement, ''),
@@ -55,6 +62,8 @@
             dom = ('WebKit|Moz|MS|O').match(new RegExp('(' + pre + ')', 'i'))[1];
               return "-" + pre + "-animation";
         };
+        // init
+        toggleAccordion();
       }
     };
     // Building the plugin
