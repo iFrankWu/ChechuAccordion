@@ -29,11 +29,23 @@ h2
 .accordion
   background: url(../img/loader.gif) no-repeat center center
 
+/* Animations */
 @-webkit-keyframes slideDown {
     0% { opacity: 0; -webkit-transform: translateY(150px); }
     100% { opacity: 1; -webkit-transform: translateY(0px); }
 }
+@-webkit-keyframes slideUp {
+    0% { opacity: 0; -webkit-transform: translateY(-150px); }
+    100% { opacity: 1; -webkit-transform: translateY(0px); }
+}
 
-.slide-Down{
- -webkit-animation: slideDown 1.5s ease;
+/*Firefox only*/
+@-moz-keyframes slideDown {
+    0% { opacity: 0; -moz-transform: translateY(150px); }
+    100% { opacity: 1; -moz-transform: translateY(0px); }
+}
+
+@-moz-keyframes slideUp {
+    0% { opacity: 0; -moz-transform: translateY(-150px); }
+    100% { opacity: 1; -moz-transform: translateY(0px); }
 }

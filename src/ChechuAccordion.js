@@ -10,10 +10,16 @@
         this.options               = $.extend({}, options);
         this.$element              = $(element);
         this.$container            = this.$element;
+
+        // Plugin Options
+        this.$effect               = this.options.effect        || 'slideDown'; // slideUp, slideDown
+        this.$slideTime            = this.options.slideTime     || 1.5;         // Time in milliseconds
+        this.$closeAnySlide        = this.options.closeAnySlide || true;
+
         // Dom elements
         this.$accordion            = this.$container.children();
         this.$accordionHeading     = this.$accordion.find('h2');
-        this.$accordionHeadingOpen = this.$accordionHeading.addClass('opened');
+        //this.$accordionHeadingOpen = this.$accordionHeading.addClass('opened');
         this.$accordionContent     = this.$accordionHeading.next('div');
 
       // init plugin
@@ -27,13 +33,28 @@
             t.$accordionHeading.on('click',function(){
               // Close any opened content
               $.each(t.$accordionHeading, function(){
-                  t.$accordionContent.hide().removeClass('slide-Down').parent().find('span').text('+');
+                t.$accordionContent.hide().removeAttr('style').parent().find('span').text('+');
               });
               // Show current clicked content
-              $(this).next(this.$accordionContent).addClass('slide-Down').css({display:'block'}).parent().find('span').text('-');
+              $(this).next(this.$accordionContent).show()
+                .css("" + Prefixes() + "" , ""+t.$effect+" "+t.$slideTime+"s ease")
+                  .parent()
+                    .find('span')
+                      .text('-');
             });
         };
         toggleAccordion();
+        // Get Css Prefixes in order to animate the movement with any web browser
+        var Prefixes = function () {
+          var styles = window.getComputedStyle(document.documentElement, ''),
+            pre = (Array.prototype.slice
+              .call(styles)
+              .join('')
+              .match(/-(moz|webkit|ms)-/) || (styles.OLink === '' && ['', 'o'])
+            )[1],
+            dom = ('WebKit|Moz|MS|O').match(new RegExp('(' + pre + ')', 'i'))[1];
+              return "-" + pre + "-animation";
+        };
       }
     };
     // Building the plugin
