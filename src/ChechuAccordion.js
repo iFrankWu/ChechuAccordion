@@ -6,17 +6,22 @@
      * @param (object) options - A list of options for the plugin
      */
     $[pluginName] = function (element, options) {
-      // Plugin parameters
-        this.options               = $.extend({}, options);
+        var defaults = {
+            effect: 'slideDown',
+            slideTime: 1.0,
+            closeAnySlide: true,
+            loaderImg: true
+        };
+        // Plugin parameters
+        this.options               = $.extend({},defaults, options);
         this.$element              = $(element);
         this.$container            = this.$element;
 
         // Plugin Options
-        this.$effect               = this.options.effect        || 'slideDown'; // slideUp, slideDown
-        this.$slideTime            = this.options.slideTime     || 1.0;        // Time in milliseconds
-        this.$closeAnySlide        = this.options.closeAnySlide || true;
-        this.$loaderImg            = (this.options.loaderImg) ? true : false;
-
+        this.$effect               = this.options.effect ; // slideUp, slideDown
+        this.$slideTime            = this.options.slideTime;    // Time in milliseconds
+        this.$closeAnySlide        = this.options.closeAnySlide;
+        this.$loaderImg            = this.options.loaderImg;
         // Dom elements
         this.$accordion            = this.$container.children();
         this.$accordionHeading     = this.$accordion.find('h2');
