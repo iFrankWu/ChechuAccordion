@@ -9,7 +9,7 @@
         var defaults = {
             effect: 'slideDown',
             slideTime: 1.0,
-            closeAnySlide: true,
+            hideAllPanels: true,
             loaderImg: true
         };
         // Plugin parameters
@@ -20,7 +20,7 @@
         // Plugin Options
         this.$effect               = this.options.effect ; // slideUp, slideDown
         this.$slideTime            = this.options.slideTime;    // Time in milliseconds
-        this.$closeAnySlide        = this.options.closeAnySlide;
+        this.$hideAllPanels        = this.options.hideAllPanels;
         this.$loaderImg            = this.options.loaderImg;
         // Dom elements
         this.$accordion            = this.$container.children();
@@ -35,13 +35,13 @@
       Accordion: function () {
         var t = this;
         var toggleAccordion = function(){
-            t.$accordionHeading.on('click',function(){
-              // Close any opened content
-              closeToggles();
+            t.$accordionHeading.on('click',function(event){
+              // Close any opened content or close/open panels individually.
+              var slidePanel = (t.$hideAllPanels) ? closeToggles() : individualToggle.apply(this);
               // Show loader in case is activated
               if(t.$loaderImg)  t.$accordion.addClass('loader');
               // Show current clicked content
-              showCurrentContent.apply(this);
+              showOrHideContent.apply(this);
             });
         };
         var closeToggles = function(){
@@ -49,12 +49,24 @@
               t.$accordionContent.hide().removeAttr('style').parent().find('span').text('+');
           });
         };
-        var showCurrentContent = function(){
-          $(this).next(this.$accordionContent).show()
-              .css("" + Prefixes() + "" , ""+t.$effect+" "+t.$slideTime+"s ease")
+        var individualToggle = function(){
+          $.each(t.$accordionHeading,function(){
+             t.$accordionHeading.removeClass('opened');
+          });
+          // Current 'h2.opened'
+          $(this).addClass('opened').bind('click',function(){
+              showOrHideContent.apply(this);
+          }).on('click',function() {
+              showOrHideContent.apply(this);
+          });
+        };
+        var showOrHideContent = function(){
+          var nextAccordion = $(this).next(this.$accordionContent);
+          (nextAccordion.css('display') == 'none') ? nextAccordion.show() : nextAccordion.hide();
+            nextAccordion.css("" + Prefixes() + "" , ""+t.$effect+" "+t.$slideTime+"s ease")
                 .parent()
                   .find('span')
-                    .text('-');
+                    .text(($(this).find('span').text() == '+') ? '-' : '+' );
         };
         // Get Css Prefixes in order to animate the movement with any web browser
         var Prefixes = function () {

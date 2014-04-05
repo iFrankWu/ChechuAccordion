@@ -6,10 +6,13 @@ Zepto and jQuery Plugin: ChechuAccordion offers and easy way of displaying html 
 Options :
 ---------
 
-effect          'slideDown';  // slideUp, slideDown
-slideTime       1.5           // Time in seconds
-loaderImg       true of false
+effect        : 'slideDown';  // slideUp, slideDown
+slideTime     : 1.5           // Time in seconds
+hideAllPanels : true/false    // if true, all panels will be closed at each click except the current one.
+loaderImg     : true/false
 
 Ex:
-$('#homeAccordion').ChechuAccordion({effect: 'slideUp',slideTime:1.5, loaderImg: true});
+$(document).ready(function() {
+    $('#homeAccordion').ChechuAccordion({effect: 'slideDown',slideTime:1.0, hideAllPanels:true, loaderImg: true});
+});
 
