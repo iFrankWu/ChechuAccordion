@@ -1,8 +1,22 @@
-section#js
-  width 600px
-  margin 0 auto
 
+section#js
+  width 400px
+  margin 0 auto
+  font-family helvetica
+  float left
+  padding 10px
+  overflow hidden
+  p
+    font-size 14px
+    span
+      display: block;
+      background-color: #000;
+      color: #fff;
+      font-size: 12px;
+      padding: 10px;
 #homeAccordion
+#homeAccordion2
+#homeAccordion3
   width 100%
   background-color #fff
   border 1px solid #666
@@ -11,20 +25,35 @@ section#js
 h2
   padding 5px
   margin 0
-  background-color #ccc
   cursor pointer
-  border-bottom 1px solid #666
   overflow hidden
-  position: relative
-  z-index: 99999
+  position relative
+  z-index 99999
+  color #fff
+  text-shadow 1px 4px 6px #000, 0 0 0 #000, 1px 4px 6px #000
+  background-image: -webkit-gradient(
+    linear,
+    left top,
+    left bottom,
+    color-stop(0, #A6A6A6),
+    color-stop(0.51, #949294)
+  );
+  background-image: -o-linear-gradient(bottom, #A6A6A6 0%, #949294 51%);
+  background-image: -moz-linear-gradient(bottom, #A6A6A6 0%, #949294 51%);
+  background-image: -webkit-linear-gradient(bottom, #A6A6A6 0%, #949294 51%);
+  background-image: -ms-linear-gradient(bottom, #A6A6A6 0%, #949294 51%);
+  background-image: linear-gradient(to bottom, #A6A6A6 0%, #949294 51%);
   span
     float right
+.animSpanPlus
+  -webkit-transform:rotate(30deg)
 .content
   background-color #fff
   color #000
   border-bottom 1px solid #666
   padding 5px
   display none
+  height auto
 
 .loader
   background: url(../img/loader.gif) no-repeat center center
@@ -39,6 +68,11 @@ h2
     100% { opacity: 1; -webkit-transform: translateY(0px); }
 }
 
+@-webkit-keyframes rotate {
+    0% { opacity: 0; -webkit-transform:rotate(0deg); }
+    100% { opacity: 1; -webkit-transform:rotate(360deg); }
+}
+
 /*Firefox only*/
 @-moz-keyframes slideDown {
     0% { opacity: 0; -moz-transform: translateY(150px); }
@@ -48,4 +82,8 @@ h2
 @-moz-keyframes slideUp {
     0% { opacity: 0; -moz-transform: translateY(-150px); }
     100% { opacity: 1; -moz-transform: translateY(0px); }
+}
+@-moz-keyframes rotate {
+    0% { opacity: 0; -moz-transform:rotate(0deg); }
+    100% { opacity: 1; -moz-transform:rotate(360deg); }
 }

@@ -7,10 +7,10 @@
      */
     $[pluginName] = function (element, options) {
         var defaults = {
-            effect: 'slideDown',
-            slideTime: 1.0,
-            hideAllPanels: true,
-            loaderImg: true
+            effect: 'slideDown', // slideUp, slideDown,rotate
+            slideTime: 1.0,      // time in seconds
+            hideAllPanels: true, // true or false
+            loaderImg: true      // true or false
         };
         // Plugin parameters
         this.options               = $.extend({},defaults, options);
@@ -18,8 +18,8 @@
         this.$container            = this.$element;
 
         // Plugin Options
-        this.$effect               = this.options.effect ; // slideUp, slideDown
-        this.$slideTime            = this.options.slideTime;    // Time in milliseconds
+        this.$effect               = this.options.effect ;
+        this.$slideTime            = this.options.slideTime;
         this.$hideAllPanels        = this.options.hideAllPanels;
         this.$loaderImg            = this.options.loaderImg;
         // Dom elements
